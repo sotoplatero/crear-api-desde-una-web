@@ -16,10 +16,12 @@ module.exports = async (req, res) => {
     const body = await got(url).text()
     // return 'url'
     const $ = cheerio.load(body)
-    const ads = $('.listing.list-mode').map( node => ({
-        title: $(node).find('a').text(),
-        url: $(node).find('a').attr('href'),
-    }) ).toArray()
+    ads = $('.listing.list-mode')
+      .map( (i, el) => ({
+          title: $(el).find('a').text(),
+          url: $(el).find('a').attr('href'),
+      }) )
+      .toArray()
   }
 
   // retornamos un JSON con el saludo

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Mi API</title>
+	<link rel="stylesheet" href="https://unpkg.com/axist@latest/dist/axist.min.css" />
+	<script defer src="https://unpkg.com/alpinejs@3.4.2/dist/cdn.min.js"></script>
+</head>
+<body>
+
+	<div x-data="{name: '', msg: ''}">
+		<form @submit.prevent="() => {
+			fetch(`/api/que-bola.json?name=${name}`)
+				.then( res => res.json() )
+				.then( ({ text }) => msg = text )			
+		}">
+			<label for="">Dime tu nombre</label>
+			<!--  -->
+			<input type="text" x-model="name">
+		</form>
+		<!-- Mostrar el mensaje -->
+		<template x-if="name">
+			<span x-text="msg"></span>
+		</template>
+	</div>
+
+</body>
+</html>
